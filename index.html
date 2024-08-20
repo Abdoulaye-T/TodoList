@@ -52,29 +52,50 @@
         </template> -->
 
     <script>
-        var personne = {
-        nom: ["Jean", "Martin"],
-        age: 32,
-        sexe: "masculin",
-        interets: ["musique", "skier"],
-        bio: function () {
-            alert(
-            this.nom[0] +
-                " " +
-                this.nom[1] +
-                " a " +
-                this.age +
-                " ans. Il aime " +
-                this.interets[0] +
-                " et " +
-                this.interets[1] +
-                ".",
-            );
-        },
-        salutation: function () {
-            alert("Bonjour ! Je suis " + this.nom[0] + ".");
-        },
-        };
+        class Student {
+            // La propriété sera automatiquement placée sur l'objet lors de sa construction
+                notes = []
+
+            // La méthode constructor permet d'indiquer comment le type sera construit
+            constructor (firstname, lastname) {
+                // this permettra d'accéder à l'objet construit
+                this.firstname = firstname
+                this.lastname = lastname
+            }
+             // On peut ajouter des méthodes, this fera référence à l'objet sur lequel on utilisera la méthode
+            addNote (note) {
+                this.notes.push(note)
+            }
+
+            // On peut créer des getters, ce sont des sortes de propriétés magiques qui ont une logique
+            get fullname () {
+                return `${this.firstname} ${this.lastname}`
+            }
+
+            get moyenne () {
+                let sum = 0
+                for (let note of this.notes) {
+                    sum += note
+                }
+                return sum / this.notes.length
+            }
+
+            // On peut aussi créer des setters pour ajouter de la logique
+            set name (str) {
+                const items = str.split(' ')
+                this.firstname = items[0]
+                this.lastname = items[1]
+            }
+
+        }
+
+        const john = new Student('John', 'Doe') 
+        john.notes // []
+        john.fullname // "John Doe"
+        john.addNote(18)
+        john.moyenne // 18
+        john.name = 'Jane Doe'
+        john.firstname = "Jane"
 
     </script>
 </body>
